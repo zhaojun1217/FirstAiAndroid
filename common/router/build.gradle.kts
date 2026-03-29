@@ -23,11 +23,7 @@ android {
         jvmTarget = "17"
     }
 }
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
-}
+
 dependencies {
     api(libs.therouter.router)
     kapt(libs.therouter.apt)
