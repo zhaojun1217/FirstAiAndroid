@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import com.therouter.router.Route
 import com.zhaojun.feature.login.ui.LoginPage
 import com.zhaojun.router.RouterPath
+import com.zhaojun.router.service.Navigator
 
 /**
  *     author : zhaojun
