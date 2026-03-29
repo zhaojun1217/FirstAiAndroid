@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -38,7 +39,9 @@ dependencies {
     implementation(project(":common:network"))
 
     implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.moshi)
     implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -54,6 +57,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     kapt(libs.therouter.apt)
-
+    ksp(libs.moshi.kotlin.codegen)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

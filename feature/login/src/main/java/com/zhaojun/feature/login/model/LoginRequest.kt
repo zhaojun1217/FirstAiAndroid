@@ -12,10 +12,3 @@ data class LoginRequest(
     val username: String,
     val password: String
 )
-
-@JsonClass(generateAdapter = true)
-data class LoginData(
-    val userId: String,
-    val token: String,
-    val nickname: String?
-)
