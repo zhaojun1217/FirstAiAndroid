@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.therouter.TheRouter
 import com.zhaojun.firstaiandroid.ui.theme.FirstAiAndroidTheme
+import com.zhaojun.router.RouterPath
 import kotlinx.coroutines.Dispatchers
 
 class MainActivity : ComponentActivity() {
@@ -20,18 +22,21 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
-        setContent {
-            FirstAiAndroidTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = name,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        TheRouter.build(RouterPath.HOME).navigation(this)
+        finish()
+//        enableEdgeToEdge()
+
+//        setContent {
+//            FirstAiAndroidTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = name,
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+//            }
+//        }
     }
 }
 
