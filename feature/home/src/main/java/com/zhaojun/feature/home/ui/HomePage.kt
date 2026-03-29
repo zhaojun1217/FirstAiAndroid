@@ -1,4 +1,4 @@
-package com.zhaojun.feature.home
+package com.zhaojun.feature.home.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.therouter.TheRouter
-import com.zhaojun.router.RouterPath
+import com.zhaojun.feature.home.vm.HomeViewModel
+import com.zhaojun.router.service.Navigator
+import kotlin.jvm.java
 
 /**
  *     author : zhaojun
@@ -33,8 +35,7 @@ fun HomePage(vm: HomeViewModel = viewModel()) {
 
         Button(
             onClick = {
-//                vm.updateTitle("准备跳转 Mine")
-                TheRouter.build(RouterPath.MINE).navigation()
+                Navigator.toMine()
             }
         ) {
             Text("跳转到 Mine")

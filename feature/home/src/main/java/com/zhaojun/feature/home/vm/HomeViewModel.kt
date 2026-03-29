@@ -1,7 +1,8 @@
-package com.zhaojun.feature.home
+package com.zhaojun.feature.home.vm
 
 import com.therouter.TheRouter
 import com.zhaojun.common.core.base.BaseViewModel
+import com.zhaojun.feature.home.state.HomeUiState
 import com.zhaojun.router.service.UserService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
