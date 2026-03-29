@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":common:core"))
     implementation(project(":common:router"))
     implementation(project(":common:ui"))
+    implementation(project(":feature:login"))
     implementation(project(":feature:home"))
     implementation(project(":feature:mine"))
     implementation(libs.androidx.core.ktx)

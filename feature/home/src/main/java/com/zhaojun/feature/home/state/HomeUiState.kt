@@ -6,6 +6,6 @@ package com.zhaojun.feature.home.state
  *     time   : 2026/03/29
  */
 data class HomeUiState(
-    val title: String = "Home Page",
+    val title: String = "首页",
     val loading: Boolean = false
 )

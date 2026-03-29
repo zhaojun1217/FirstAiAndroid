@@ -8,4 +8,5 @@ package com.zhaojun.router
 object RouterPath {
     const val HOME = "/home/main"
     const val MINE = "/mine/main"
+    const val LOGIN = "/login/main"
 }

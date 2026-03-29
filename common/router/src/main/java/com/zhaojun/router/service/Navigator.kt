@@ -9,6 +9,10 @@ import com.zhaojun.router.RouterPath
  *     time   : 2026/03/29
  */
 object Navigator {
+    fun toLogin() {
+        TheRouter.build(RouterPath.LOGIN).navigation()
+    }
+
     fun toHome() {
         TheRouter.build(RouterPath.HOME).navigation()
     }
