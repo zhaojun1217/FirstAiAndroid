@@ -42,11 +42,7 @@ android {
         compose = true
     }
 }
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-    }
-}
+
 dependencies {
     implementation(project(":common:core"))
     implementation(project(":common:router"))
