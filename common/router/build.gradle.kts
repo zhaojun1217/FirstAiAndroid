@@ -6,9 +6,7 @@ plugins {
 
 android {
     namespace = "com.zhaojun.common.router"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24

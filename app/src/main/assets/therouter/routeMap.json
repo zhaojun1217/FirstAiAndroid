@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/mine/main",
+    "className": "com.zhaojun.feature.mine.MineActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/home/main",
+    "className": "com.zhaojun.feature.home.HomeActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  }
+]

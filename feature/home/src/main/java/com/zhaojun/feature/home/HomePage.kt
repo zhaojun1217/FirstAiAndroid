@@ -33,6 +33,7 @@ fun HomePage(vm: HomeViewModel = viewModel()) {
 
         Button(
             onClick = {
+//                vm.updateTitle("准备跳转 Mine")
                 TheRouter.build(RouterPath.MINE).navigation()
             }
         ) {
