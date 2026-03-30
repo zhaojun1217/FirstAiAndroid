@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhaojun.feature.login.vm.LoginViewModel
@@ -40,7 +41,7 @@ import com.zhaojun.router.service.Navigator
 @Composable
 fun LoginPage(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = viewModel(),
+    viewModel: LoginViewModel = hiltViewModel(),
     onLoginSuccess: () -> Unit = {}
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
@@ -95,7 +96,6 @@ fun LoginPage(
         Button(
             onClick = {
                 viewModel.login()
-                onLoginSuccess()
             },
             modifier = Modifier.fillMaxWidth(),
             enabled = uiState.account.isNotBlank() &&

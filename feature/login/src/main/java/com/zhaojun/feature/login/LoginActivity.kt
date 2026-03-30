@@ -7,12 +7,14 @@ import com.therouter.router.Route
 import com.zhaojun.feature.login.ui.LoginPage
 import com.zhaojun.router.RouterPath
 import com.zhaojun.router.service.Navigator
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  *     author : zhaojun
  *     e-mail : 1334561398@qq.com
  *     time   : 2026/03/29
  */
+@AndroidEntryPoint
 @Route(path = RouterPath.LOGIN)
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

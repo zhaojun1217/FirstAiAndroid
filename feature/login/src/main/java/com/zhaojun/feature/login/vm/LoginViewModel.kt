@@ -3,8 +3,11 @@ package com.zhaojun.feature.login.vm
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.zhaojun.common.core.base.BaseViewModel
+import com.zhaojun.common.core.store.UserPreferencesRepository
 import com.zhaojun.feature.login.repository.LoginRepository
 import com.zhaojun.feature.login.state.LoginUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -14,8 +17,11 @@ import kotlinx.coroutines.launch
  *     e-mail : 1334561398@qq.com
  *     time   : 2026/03/29
  */
-class LoginViewModel : BaseViewModel() {
-    private val repository = LoginRepository()
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: LoginRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
+) : BaseViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -37,9 +43,14 @@ class LoginViewModel : BaseViewModel() {
                 repository.login(state.account, state.password)
             }.onSuccess { resp ->
                 Log.d("Login Success", resp.toString())
-                _uiState.value = _uiState.value.copy(isLoading = false, loginSuccess = true)
-                // 这里后面再处理 token / 用户信息
+                val token = resp.data?.token.orEmpty()
+//                val uid = resp.data?.uid.orEmpty()
 
+                if (token.isNotEmpty()) {
+                    userPreferencesRepository.saveLoginInfo(token, "uid")
+                }
+
+                _uiState.value = _uiState.value.copy(isLoading = false, loginSuccess = true)
             }.onFailure { e ->
                 Log.d("Login Error", e.toString())
                 _uiState.value = _uiState.value.copy(

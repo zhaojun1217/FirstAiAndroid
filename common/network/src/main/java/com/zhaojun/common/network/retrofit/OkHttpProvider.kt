@@ -1,8 +1,8 @@
 package com.zhaojun.common.network.retrofit
 
 import com.zhaojun.common.network.config.NetworkConfig
+import com.zhaojun.common.network.interceptor.AuthInterceptor
 import com.zhaojun.common.network.interceptor.HeaderInterceptor
-import com.zhaojun.common.network.interceptor.TokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -29,7 +29,7 @@ object OkHttpProvider {
             .readTimeout(NetworkConfig.READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(NetworkConfig.WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(HeaderInterceptor())
-            .addInterceptor(TokenInterceptor { null })
+//            .addInterceptor(AuthInterceptor())
             .addInterceptor(createLoggingInterceptor())
             .build()
     }
