@@ -1,7 +1,9 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+val isLoginAlone = false
 
 plugins {
     alias(libs.plugins.android.library)
+//    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
@@ -15,6 +17,23 @@ android {
 
     defaultConfig {
         minSdk = 24
+
+//        if (isLoginAlone) {
+//            applicationId = "com.zhaojun.feature.login"
+//            versionCode = 1
+//            versionName = "1.0"
+//            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
 
     buildFeatures {
@@ -64,4 +83,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    if (isLoginAlone) {
+        implementation(libs.androidx.appcompat)
+    }
 }

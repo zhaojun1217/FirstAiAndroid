@@ -9,6 +9,10 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+val loginAlone = project.findProperty("loginAlone")?.toString()?.toBoolean() ?: false
+val homeAlone = project.findProperty("homeAlone")?.toString()?.toBoolean() ?: false
+val mineAlone = project.findProperty("mineAlone")?.toString()?.toBoolean() ?: false
+
 android {
     namespace = "com.zhaojun.firstaiandroid"
     compileSdk = 36
@@ -54,9 +58,15 @@ dependencies {
     implementation(project(":common:router"))
     implementation(project(":common:ui"))
     implementation(project(":common:network"))
-    implementation(project(":feature:login"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:mine"))
+    if (!loginAlone) {
+        implementation(project(":feature:login"))
+    }
+    if (!homeAlone) {
+        implementation(project(":feature:home"))
+    }
+    if (!mineAlone) {
+        implementation(project(":feature:mine"))
+    }
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
