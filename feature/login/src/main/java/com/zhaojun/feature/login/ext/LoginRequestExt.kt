@@ -1,8 +1,10 @@
-package com.zhaojun.common.network.ext
+package com.zhaojun.feature.login.ext
 
-import com.zhaojun.common.network.model.ApiResult
+import android.net.http.HttpException
+import com.zhaojun.common.network.ext.safeApiCall
 import com.zhaojun.common.network.model.ApiEnvelope
-import retrofit2.HttpException
+import com.zhaojun.common.network.model.ApiResult
+import com.zhaojun.feature.login.model.LoginBizResponse
 import java.io.IOException
 
 /**
@@ -10,26 +12,25 @@ import java.io.IOException
  *     e-mail : 1334561398@qq.com
  *     time   : 2026/03/30
  */
-suspend fun <T> safeApiCall(
-    apiCall: suspend () -> ApiEnvelope<T>
+suspend fun <T> safeLoginApiCall(
+    apiCall: suspend () -> LoginBizResponse<T>
 ): ApiResult<T> {
     return try {
+
         val response = apiCall()
-        if (response.isHttpSuccess()) {
+
+        if (response.isBizSuccess()) {
             ApiResult.Success(response.data)
         } else {
             ApiResult.Error(
                 code = response.code,
-                message = response.message.ifBlank { "请求失败" }
+                message = response.msg
             )
         }
-    } catch (e: HttpException) {
-        ApiResult.Error(
-            code = e.code(),
-            message = e.message ?: "HTTP ${e.code()} 请求失败"
-        )
+
     } catch (e: IOException) {
         ApiResult.Error(message = "网络连接失败")
+
     } catch (e: Exception) {
         ApiResult.Error(message = e.message ?: "未知异常")
     }

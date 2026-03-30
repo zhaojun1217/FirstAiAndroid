@@ -8,10 +8,10 @@ package com.zhaojun.common.network.model
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class BaseResponse<T>(
+data class ApiEnvelope<T>(
     val code: Int,
-    val msg: String,
+    val message: String,
     val data: T?
 ) {
-    fun isSuccess(): Boolean = code == 200
+    fun isHttpSuccess(): Boolean = code == 200
 }

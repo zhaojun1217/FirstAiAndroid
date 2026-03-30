@@ -11,6 +11,4 @@ sealed class ApiResult<out T> {
         val code: Int? = null,
         val message: String
     ) : ApiResult<Nothing>()
-
-//    data object Loading : ApiResult<Nothing>()
 }

@@ -12,9 +12,13 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class App : Application() {
 
+    companion object {
+        lateinit var context: Application
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
-
-
+        context = this
     }
 }

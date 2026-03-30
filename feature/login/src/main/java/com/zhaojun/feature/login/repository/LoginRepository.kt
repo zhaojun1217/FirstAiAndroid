@@ -1,9 +1,8 @@
 package com.zhaojun.feature.login.repository
 
-import com.zhaojun.common.network.ext.safeApiCall
 import com.zhaojun.common.network.model.ApiResult
-import com.zhaojun.common.network.retrofit.ServiceCreator
 import com.zhaojun.feature.login.api.LoginApiService
+import com.zhaojun.feature.login.ext.safeLoginApiCall
 import com.zhaojun.feature.login.model.LoginRequest
 import com.zhaojun.feature.login.model.LoginResponse
 import jakarta.inject.Inject
@@ -20,7 +19,7 @@ class LoginRepository @Inject constructor(
         account: String,
         password: String
     ): ApiResult<LoginResponse> {
-        return safeApiCall {
+        return safeLoginApiCall {
             loginApiService.login(
                 LoginRequest(
                     username = account,
