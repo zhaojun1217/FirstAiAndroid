@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.zhaojun.common.core.base.BaseViewModel
 import com.zhaojun.common.core.store.UserPreferencesRepository
+import com.zhaojun.common.network.interceptor.DefaultTokenProvider
+import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.login.repository.LoginRepository
 import com.zhaojun.feature.login.state.LoginUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +22,8 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repository: LoginRepository,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val tokenProvider: DefaultTokenProvider
 ) : BaseViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState = _uiState.asStateFlow()
@@ -39,24 +42,27 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch {
             _uiState.value = state.copy(isLoading = true, errorMsg = null)
-            runCatching {
-                repository.login(state.account, state.password)
-            }.onSuccess { resp ->
-                Log.d("Login Success", resp.toString())
-                val token = resp.data?.token.orEmpty()
-//                val uid = resp.data?.uid.orEmpty()
+            when (val result = repository.login(state.account, state.password)) {
 
-                if (token.isNotEmpty()) {
-                    userPreferencesRepository.saveLoginInfo(token, "uid")
+                is ApiResult.Success -> {
+                    val token = result.data?.token.orEmpty()
+                    Log.d("Login Success", token)
+                    // 登录成功
+                    if (token.isNotEmpty()) {
+                        tokenProvider.updateToken(token)
+                        userPreferencesRepository.saveLoginInfo(token, "uid")
+                    }
+                    _uiState.value = _uiState.value.copy(isLoading = false, loginSuccess = true)
                 }
 
-                _uiState.value = _uiState.value.copy(isLoading = false, loginSuccess = true)
-            }.onFailure { e ->
-                Log.d("Login Error", e.toString())
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    errorMsg = e.message
-                )
+                is ApiResult.Error -> {
+                    // 统一错误处理
+//                    toast(result.message)
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        errorMsg = result.message
+                    )
+                }
             }
         }
     }

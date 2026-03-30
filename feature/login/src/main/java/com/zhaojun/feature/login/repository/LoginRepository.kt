@@ -1,8 +1,11 @@
 package com.zhaojun.feature.login.repository
 
+import com.zhaojun.common.network.ext.safeApiCall
+import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.common.network.retrofit.ServiceCreator
 import com.zhaojun.feature.login.api.LoginApiService
 import com.zhaojun.feature.login.model.LoginRequest
+import com.zhaojun.feature.login.model.LoginResponse
 import jakarta.inject.Inject
 
 /**
@@ -13,6 +16,17 @@ import jakarta.inject.Inject
 class LoginRepository @Inject constructor(
     private val loginApiService: LoginApiService
 ) {
-    suspend fun login(account: String, password: String) =
-        loginApiService.login(LoginRequest(account, password))
+    suspend fun login(
+        account: String,
+        password: String
+    ): ApiResult<LoginResponse> {
+        return safeApiCall {
+            loginApiService.login(
+                LoginRequest(
+                    username = account,
+                    password = password
+                )
+            )
+        }
+    }
 }

@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":common:core"))
     implementation(project(":common:router"))
     implementation(project(":common:ui"))
+    implementation(project(":common:network"))
     implementation(project(":feature:login"))
     implementation(project(":feature:home"))
     implementation(project(":feature:mine"))
