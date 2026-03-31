@@ -4,8 +4,10 @@
 
     <application
         android:name="com.zhaojun.feature.home_debug.HomeDebugApp"
-        android:label="首页模块独立APP"
-        tools:replace="android:label">
+        android:label="首页模块APP"
+        tools:replace="android:label"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.FirstAiAndroid">
         <activity
             android:name="com.zhaojun.feature.home.HomeActivity"
             android:exported="true">

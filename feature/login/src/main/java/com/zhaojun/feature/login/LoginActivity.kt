@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.therouter.router.Route
+import com.zhaojun.common.ui.theme.FirstAiTheme
 import com.zhaojun.feature.login.ui.LoginPage
 import com.zhaojun.router.RouterPath
-import com.zhaojun.router.service.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -20,7 +20,9 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginPage()
+            FirstAiTheme() {
+                LoginPage()
+            }
         }
     }
 }

@@ -4,7 +4,9 @@
     <application
         android:name="com.zhaojun.feature.login_debug.LoginDebugApp"
         tools:replace="android:label"
-        android:label="登录模块独立APP">
+        android:theme="@style/Theme.FirstAiAndroid"
+        android:icon="@mipmap/ic_launcher"
+        android:label="登录模块APP">
 
         <activity
             android:name="com.zhaojun.feature.login.LoginActivity"
