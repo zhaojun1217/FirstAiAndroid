@@ -1,6 +1,7 @@
 package com.zhaojun.feature.home.ui.setting
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.foundation.background
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
@@ -27,11 +30,14 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.zhaojun.common.core.util.UiEvent
 import com.zhaojun.feature.home.vm.SettingViewModel
 import com.zhaojun.router.service.Navigator
+import com.zhaojun.common.ui.R
+import com.zhaojun.common.ui.component.CommonLoading
 
 /**
  *     author : zhaojun
@@ -44,6 +50,7 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
     var darkModeEnabled by rememberSaveable { mutableStateOf(false) }
     var notificationEnabled by rememberSaveable { mutableStateOf(true) }
     val context = LocalContext.current
+    val testStr = stringResource(R.string.common_confirm)
 
     LazyColumn(
         modifier = Modifier
@@ -59,7 +66,6 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
                 phone = "已登录账号：133****1398"
             )
         }
-
         item {
             SettingGroup(
                 title = "通用设置"
@@ -90,12 +96,25 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
                     icon = Icons.Default.Storage,
                     onClick = {
                         // TODO 清除缓存
-                        Toast.makeText(context, "清除缓存", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, testStr, Toast.LENGTH_SHORT).show()
                     }
                 )
             }
         }
+        item {
+//            Image(
+//                imageVector = Icons.Default.Storage,
+//                contentDescription = "存储"
+//            )
 
+//            Image(
+//                painter = painterResource(R.drawable.svg_logo),
+//                contentDescription = "设置",
+//                modifier = Modifier
+//                    .size(80.dp)
+//                    .wrapContentSize()
+//            )
+        }
         item {
             SettingGroup(
                 title = "关于"
@@ -118,7 +137,6 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
                 )
             }
         }
-
         item {
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -126,7 +144,7 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
                 onClick = {
                     // TODO 退出登录
 //                    Toast.makeText(context, "退出登录", Toast.LENGTH_SHORT).show()
-                    vm.showToast()
+
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

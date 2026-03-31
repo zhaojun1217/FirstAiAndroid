@@ -1,6 +1,7 @@
 package com.zhaojun.feature.home.ui.discover
 
 import androidx.compose.runtime.Composable
+import com.zhaojun.common.ui.component.CommonEmptyView
 
 /**
  *     author : zhaojun
@@ -9,5 +10,5 @@ import androidx.compose.runtime.Composable
  */
 @Composable
 fun DiscoverPage() {
-
+    CommonEmptyView()
 }
