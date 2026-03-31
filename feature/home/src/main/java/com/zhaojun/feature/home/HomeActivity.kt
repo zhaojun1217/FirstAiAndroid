@@ -1,10 +1,10 @@
 package com.zhaojun.feature.home
 
+import HomeMainScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.therouter.router.Route
-import com.zhaojun.feature.home.ui.HomePage
 import com.zhaojun.router.RouterPath
 
 /**
@@ -17,7 +17,7 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HomePage()
+            HomeMainScreen()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.zhaojun.feature.home.ui
+package com.zhaojun.feature.home.ui.home
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -13,10 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.therouter.TheRouter
 import com.zhaojun.feature.home.vm.HomeViewModel
-import com.zhaojun.router.service.Navigator
-import kotlin.jvm.java
 
 /**
  *     author : zhaojun
