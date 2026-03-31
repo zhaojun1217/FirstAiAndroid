@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.zhaojun.feature.logindebug"
+    namespace = "com.zhaojun.feature.homedebug"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.zhaojun.feature.logindebug"
+        applicationId = "com.zhaojun.feature.home_debug"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -30,7 +30,6 @@ android {
             )
         }
     }
-
     buildFeatures {
         compose = true
     }
@@ -48,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:login"))
+    implementation(project(":feature:home"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

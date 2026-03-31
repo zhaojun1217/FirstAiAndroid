@@ -1,20 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="com.zhaojun.feature.login_debug.LoginDebugApp"
-        tools:replace="android:label"
-        android:label="登录模块独立APP">
-
+        android:name="com.zhaojun.feature.home_debug.HomeDebugApp"
+        android:label="首页模块独立APP"
+        tools:replace="android:label">
         <activity
-            android:name="com.zhaojun.feature.login.LoginActivity"
+            android:name="com.zhaojun.feature.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
-
 </manifest>
+
+
