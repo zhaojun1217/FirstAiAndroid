@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
@@ -10,11 +10,15 @@ plugins {
 }
 
 android {
-    namespace = "com.zhaojun.feature.login"
+    namespace = "com.zhaojun.feature.logindebug"
     compileSdk = 36
 
     defaultConfig {
+        applicationId = "com.zhaojun.feature.logindebug"
         minSdk = 24
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
     }
 
     buildFeatures {
@@ -34,15 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":common:core"))
-    implementation(project(":common:router"))
-    implementation(project(":common:ui"))
-    implementation(project(":common:network"))
-
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.converter.moshi)
-    implementation(libs.moshi)
-    implementation(libs.moshi.kotlin)
+    implementation(project(":feature:login"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -58,7 +54,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
 
     kapt(libs.therouter.apt)
-    ksp(libs.moshi.kotlin.codegen)
+
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.hilt.android)
