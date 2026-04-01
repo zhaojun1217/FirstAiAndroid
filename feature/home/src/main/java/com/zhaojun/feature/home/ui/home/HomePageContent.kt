@@ -13,10 +13,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhaojun.feature.home.model.Diary
 import com.zhaojun.feature.home.state.HomeUiState
-import com.zhaojun.feature.home.ui.MainTab
 
 @Composable
 fun HomePageContent(

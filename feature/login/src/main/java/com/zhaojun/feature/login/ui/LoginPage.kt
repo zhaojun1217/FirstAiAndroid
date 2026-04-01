@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -38,12 +39,13 @@ fun LoginPage(
     viewModel: LoginViewModel = hiltViewModel(),
     onLoginSuccess: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
 
     LaunchedEffect(uiState.loginSuccess) {
         if (uiState.loginSuccess) {
             onLoginSuccess()
-            Navigator.toHome()
+            Navigator.toHome(context, true)
         }
     }
 

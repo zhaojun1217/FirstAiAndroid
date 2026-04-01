@@ -1,5 +1,7 @@
 package com.zhaojun.router.service
 
+import android.content.Context
+import android.content.Intent
 import com.therouter.TheRouter
 import com.zhaojun.router.RouterPath
 
@@ -9,13 +11,34 @@ import com.zhaojun.router.RouterPath
  *     time   : 2026/03/29
  */
 object Navigator {
-    fun toLogin() {
-        TheRouter.build(RouterPath.LOGIN).navigation()
+    // 跳登录
+    fun toLogin(context: Context, clearTask: Boolean = false) {
+        TheRouter.build(RouterPath.LOGIN)
+            .addFlags(
+                if (clearTask) {
+                    Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK  // 清空栈
+                } else {
+                    0
+                }
+            )
+            .navigation(context)
     }
 
-    fun toHome() {
-        TheRouter.build(RouterPath.HOME).navigation()
+    // 跳主页
+    fun toHome(context: Context, clearTask: Boolean = false) {
+        TheRouter.build(RouterPath.HOME)
+            .addFlags(
+                if (clearTask) {
+                    Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK  // 清空栈
+                } else {
+                    0
+                }
+            )
+            .navigation(context)
     }
+
 
     fun toMine() {
         TheRouter.build(RouterPath.MINE).navigation()

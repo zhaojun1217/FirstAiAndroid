@@ -3,8 +3,12 @@ package com.zhaojun.feature.home.vm
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhaojun.common.core.base.BaseViewModel
+import com.zhaojun.common.core.ext.AuthEventBus
+import com.zhaojun.common.core.store.UserPreferencesDataStore
+import com.zhaojun.common.core.store.UserPreferencesRepository
 import com.zhaojun.common.core.util.ToastUtil
 import com.zhaojun.common.core.util.UiEvent
+import com.zhaojun.common.network.interceptor.DefaultTokenProvider
 import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.home.repository.HomeViewRepository
 import com.zhaojun.feature.home.state.HomeUiState
@@ -24,7 +28,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: HomeViewRepository,
-    private val toastUtil: ToastUtil,
+    private val defaultTokenProvider: DefaultTokenProvider,
+    private val userPreferencesRepository: UserPreferencesRepository,
+    val authEventBus: AuthEventBus,
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -55,5 +61,12 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun clearLoginInfo() {
+        viewModelScope.launch {
+            defaultTokenProvider.clearToken()
+            userPreferencesRepository.clearLoginInfo()
+        }
     }
 }

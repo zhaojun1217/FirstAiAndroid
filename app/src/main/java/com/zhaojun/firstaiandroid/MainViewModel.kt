@@ -21,7 +21,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
     private val defaultTokenProvider: DefaultTokenProvider,
-    val authEventBus: AuthEventBus
 ) : ViewModel() {
     // 定义跳转状态
     private val _navigateState = MutableStateFlow<NavigateState>(NavigateState.LOADING)
@@ -37,13 +36,6 @@ class MainViewModel @Inject constructor(
 
             // 更新状态 → UI 自动跳转
             _navigateState.value = if (isLogin) NavigateState.HOME else NavigateState.LOGIN
-        }
-    }
-
-    fun clearLoginInfo() {
-        viewModelScope.launch {
-            defaultTokenProvider.clearToken()
-            userPreferencesRepository.clearLoginInfo()
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.zhaojun.common.core.ext
 
+import android.util.Log
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -16,6 +17,7 @@ class AuthEventBus @Inject constructor() {
     val authExpired: SharedFlow<Unit> = _authExpired.asSharedFlow()
 
     fun postExpired() {
+        Log.d("AuthEventBus", "postExpired: ${this.hashCode()}")
         _authExpired.tryEmit(Unit)
     }
 }
