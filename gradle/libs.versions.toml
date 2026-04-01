@@ -18,6 +18,7 @@ ksp = "2.3.4"
 datastore = "1.2.1"
 constraintlayout = "2.2.1"
 hilt = "2.58"
+coil-compose = "2.6.0"
 androidxComposeMaterialIconsExtended = "1.7.8"
 
 [libraries]
@@ -67,6 +68,7 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.2.0" }
 
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "androidxComposeMaterialIconsExtended" }
 
 [plugins]

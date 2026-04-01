@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,10 +9,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
-
-val loginAlone = project.findProperty("loginAlone")?.toString()?.toBoolean() ?: false
-val homeAlone = project.findProperty("homeAlone")?.toString()?.toBoolean() ?: false
-val mineAlone = project.findProperty("mineAlone")?.toString()?.toBoolean() ?: false
 
 android {
     namespace = "com.zhaojun.firstaiandroid"
@@ -58,21 +55,16 @@ dependencies {
     implementation(project(":common:router"))
     implementation(project(":common:ui"))
     implementation(project(":common:network"))
-    if (!loginAlone) {
-        implementation(project(":feature:login"))
-    }
-    if (!homeAlone) {
-        implementation(project(":feature:home"))
-    }
-    if (!mineAlone) {
-        implementation(project(":feature:mine"))
-    }
+    implementation(project(":feature:login"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:mine"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

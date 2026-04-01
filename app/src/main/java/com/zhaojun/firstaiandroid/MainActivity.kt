@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.therouter.router.Route
 import com.zhaojun.common.ui.theme.FirstAiTheme
+import com.zhaojun.firstaiandroid.ui.theme.FirstAiAndroidTheme
 import com.zhaojun.router.service.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,15 +16,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.checkLogin { isLogin ->
-
-            if (isLogin) {
-                Navigator.toHome()
-            } else {
-                Navigator.toLogin()
+        setContent {
+            FirstAiAndroidTheme {
+                MainContentView() // 路由页面，判断跳转
             }
-
-            finish()
         }
     }
 }

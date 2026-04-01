@@ -1,4 +1,4 @@
-package com.zhaojun.feature.login.model
+package com.zhaojun.feature.login.ext
 
 import com.squareup.moshi.JsonClass
 

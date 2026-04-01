@@ -1,6 +1,6 @@
 package com.zhaojun.feature.login.api
 
-import com.zhaojun.feature.login.model.LoginBizResponse
+import com.zhaojun.feature.login.ext.LoginBizResponse
 import com.zhaojun.feature.login.model.LoginRequest
 import com.zhaojun.feature.login.model.LoginResponse
 import retrofit2.http.Body

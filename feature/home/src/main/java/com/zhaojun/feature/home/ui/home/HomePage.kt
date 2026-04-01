@@ -6,13 +6,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.zhaojun.feature.home.state.HomeUiState
 import com.zhaojun.feature.home.vm.HomeViewModel
 
 /**
@@ -22,23 +26,24 @@ import com.zhaojun.feature.home.vm.HomeViewModel
  */
 
 @Composable
-fun HomePage(vm: HomeViewModel = viewModel()) {
+fun HomePage(
+    modifier: Modifier = Modifier,
+    vm: HomeViewModel = hiltViewModel()
+) {
     val uiState by vm.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(uiState.title)
 
-        Button(
-            onClick = {
-                Toast.makeText(context, "111", Toast.LENGTH_LONG).show()
-//                Navigator.toMine()
-            }
-        ) {
-            Text("跳转到 Mine")
-        }
+    LaunchedEffect(key1 = true) {
+        vm.getDiaryList()
     }
+
+    HomePageContent(
+        modifier = modifier,
+        uiState = uiState,
+        onTabSelected = vm::onTabSelected,
+        onItemClick = { item ->
+            // TODO: 点击事件
+        }
+    )
 }
+

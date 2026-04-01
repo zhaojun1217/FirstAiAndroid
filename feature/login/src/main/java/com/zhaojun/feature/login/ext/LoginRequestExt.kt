@@ -4,7 +4,7 @@ import android.net.http.HttpException
 import com.zhaojun.common.network.ext.safeApiCall
 import com.zhaojun.common.network.model.ApiEnvelope
 import com.zhaojun.common.network.model.ApiResult
-import com.zhaojun.feature.login.model.LoginBizResponse
+import com.zhaojun.feature.login.ext.LoginBizResponse
 import java.io.IOException
 
 /**

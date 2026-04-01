@@ -1,5 +1,6 @@
 package com.zhaojun.common.network.interceptor
 
+import com.zhaojun.common.core.ext.AuthEventBus
 import com.zhaojun.common.core.store.UserPreferencesRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -13,20 +14,34 @@ import javax.inject.Singleton
  *     time   : 2026/03/29
  */
 
+@Singleton
 class AuthInterceptor @Inject constructor(
-    private val tokenProvider: TokenProvider
+    private val tokenProvider: TokenProvider,
+    private val authEventBus: AuthEventBus,
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val oldRequest = chain.request()
         val token = tokenProvider.getToken()
 
-        val newRequest = oldRequest.newBuilder().apply {
-            if (!token.isNullOrBlank()) {
-                addHeader("Authorization", "Bearer $token")
+        val request = chain.request()
+            .newBuilder()
+            .apply {
+                if (!token.isNullOrEmpty()) {
+                    header("Authorization", "Bearer $token")
+                }
             }
-        }.build()
+            .build()
 
-        return chain.proceed(newRequest)
+        val response = chain.proceed(request)
+
+        if (response.code == 401) {
+
+            // 1. 发送全局过期事件
+            authEventBus.postExpired()
+
+            // 2. 关闭请求，避免后续无效请求
+            response.close()
+        }
+        return response
     }
 }
