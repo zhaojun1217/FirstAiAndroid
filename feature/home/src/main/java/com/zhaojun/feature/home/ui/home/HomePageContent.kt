@@ -26,9 +26,6 @@ fun HomePageContent(
     onItemClick: (Diary) -> Unit
 ) {
     val currentList = uiState.cardList
-    // 你说两个 tab 一样的列表，所以这里先直接共用
-    // 如果以后要分开，改成根据 selectedTabIndex 返回不同 list 即可
-
     Column(
         modifier = modifier
             .fillMaxSize()
