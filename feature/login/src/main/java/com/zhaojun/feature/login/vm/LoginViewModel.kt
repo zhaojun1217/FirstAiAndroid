@@ -2,6 +2,7 @@ package com.zhaojun.feature.login.vm
 
 import androidx.lifecycle.viewModelScope
 import com.zhaojun.common.core.base.BaseViewModel
+import com.zhaojun.common.core.ext.AuthEventBus
 import com.zhaojun.common.core.store.UserPreferencesRepository
 import com.zhaojun.common.core.util.ToastUtil
 import com.zhaojun.common.network.interceptor.DefaultTokenProvider
@@ -24,6 +25,7 @@ class LoginViewModel @Inject constructor(
     private val repository: LoginRepository,
     private val userPreferencesRepository: UserPreferencesRepository,
     private val tokenProvider: DefaultTokenProvider,
+    private val authEventBus: AuthEventBus,
     private val toastUtil: ToastUtil
 ) : BaseViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -62,6 +64,7 @@ class LoginViewModel @Inject constructor(
                     val uid = result.data?.resolvedUid(state.account).orEmpty()
                     tokenProvider.updateToken(token)
                     userPreferencesRepository.saveLoginInfo(token, uid)
+                    authEventBus.resetExpiredFlag()
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         loginSuccess = true

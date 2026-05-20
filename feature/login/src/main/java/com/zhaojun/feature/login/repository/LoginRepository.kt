@@ -1,17 +1,12 @@
 package com.zhaojun.feature.login.repository
 
+import com.zhaojun.common.network.ext.safeBizApiCall
 import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.login.api.LoginApiService
-import com.zhaojun.feature.login.ext.safeLoginApiCall
 import com.zhaojun.feature.login.model.LoginRequest
 import com.zhaojun.feature.login.model.LoginResponse
-import jakarta.inject.Inject
+import javax.inject.Inject
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/29
- */
 class LoginRepository @Inject constructor(
     private val loginApiService: LoginApiService
 ) {
@@ -19,7 +14,7 @@ class LoginRepository @Inject constructor(
         account: String,
         password: String
     ): ApiResult<LoginResponse> {
-        return safeLoginApiCall {
+        return safeBizApiCall {
             loginApiService.login(
                 LoginRequest(
                     username = account,
