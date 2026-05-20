@@ -21,10 +21,10 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FirstAiTheme() {
+            FirstAiTheme {
                 LoginPage()
             }
-            "这里是登陆页面".log()
         }
+        "这里是登陆页面".log()
     }
 }

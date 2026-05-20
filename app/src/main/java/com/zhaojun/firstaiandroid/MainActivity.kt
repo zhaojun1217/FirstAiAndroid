@@ -1,33 +1,22 @@
 package com.zhaojun.firstaiandroid
 
-import MainContentView
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import com.zhaojun.common.core.ext.log
 import com.zhaojun.common.ui.theme.FirstAiTheme
-import com.zhaojun.firstaiandroid.ui.theme.FirstAiAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FirstAiAndroidTheme {
-                MainContentView() // 路由页面，判断跳转
+            FirstAiTheme {
+                MainContentView()
             }
-            "项目启动了".log()
         }
-
-        listOf(1, 2, 3).forEach {
-            if (it == 2) {
-                return@forEach   // 只结束这次循环
-            }
-            println(it)
-        }
+        "项目启动了".log()
     }
 }

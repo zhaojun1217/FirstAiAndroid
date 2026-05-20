@@ -10,7 +10,7 @@ import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.login.repository.LoginRepository
 import com.zhaojun.feature.login.state.LoginUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
