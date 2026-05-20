@@ -1,6 +1,6 @@
 package com.zhaojun.feature.home.repository
 
-import com.zhaojun.common.network.ext.safeBizApiCall
+import com.zhaojun.common.network.ext.safeApiCall
 import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.home.api.HomeApiService
 import com.zhaojun.feature.home.model.DiaryDetResponse
@@ -12,13 +12,13 @@ class HomeViewRepository @Inject constructor(
 ) {
 
     suspend fun getDiaryList(pageIndex: Int): ApiResult<DiaryListResponse> {
-        return safeBizApiCall {
+        return safeApiCall {
             homeApiService.getDiaryList(page = pageIndex)
         }
     }
 
     suspend fun getDiaryDet(diaryId: Int): ApiResult<DiaryDetResponse> {
-        return safeBizApiCall {
+        return safeApiCall {
             homeApiService.getDiaryDetail(id = diaryId)
         }
     }

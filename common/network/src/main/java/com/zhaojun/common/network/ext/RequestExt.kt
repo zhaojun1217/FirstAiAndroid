@@ -2,7 +2,6 @@ package com.zhaojun.common.network.ext
 
 import com.zhaojun.common.network.model.ApiEnvelope
 import com.zhaojun.common.network.model.ApiResult
-import com.zhaojun.common.network.model.BizResponse
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -11,37 +10,12 @@ suspend fun <T> safeApiCall(
 ): ApiResult<T> {
     return try {
         val response = apiCall()
-        if (response.isHttpSuccess()) {
+        if (response.isSuccess()) {
             ApiResult.Success(response.data)
         } else {
             ApiResult.Error(
                 code = response.code,
                 message = response.message.ifBlank { "请求失败" }
-            )
-        }
-    } catch (e: HttpException) {
-        ApiResult.Error(
-            code = e.code(),
-            message = httpErrorMessage(e)
-        )
-    } catch (e: IOException) {
-        ApiResult.Error(message = "网络连接失败")
-    } catch (e: Exception) {
-        ApiResult.Error(message = e.message ?: "未知异常")
-    }
-}
-
-suspend fun <T> safeBizApiCall(
-    apiCall: suspend () -> BizResponse<T>
-): ApiResult<T> {
-    return try {
-        val response = apiCall()
-        if (response.isBizSuccess()) {
-            ApiResult.Success(response.data)
-        } else {
-            ApiResult.Error(
-                code = response.code,
-                message = response.msg.ifBlank { "请求失败" }
             )
         }
     } catch (e: HttpException) {

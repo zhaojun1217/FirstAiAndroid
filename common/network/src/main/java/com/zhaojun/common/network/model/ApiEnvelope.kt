@@ -1,17 +1,16 @@
 package com.zhaojun.common.network.model
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/29
- */
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * 统一业务响应包装。后端字段为 code / msg / data。
+ */
 @JsonClass(generateAdapter = true)
 data class ApiEnvelope<T>(
     val code: Int,
-    val message: String,
+    @Json(name = "msg") val message: String = "",
     val data: T?
 ) {
-    fun isHttpSuccess(): Boolean = code == 200
+    fun isSuccess(): Boolean = code == 200
 }
