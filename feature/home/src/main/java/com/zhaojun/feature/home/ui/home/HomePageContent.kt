@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -23,15 +22,14 @@ fun HomePageContent(
     onTabSelected: (Int) -> Unit,
     onItemClick: (Diary) -> Unit
 ) {
-    val currentList = uiState.cardList
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5F5))
     ) {
         HomeTabBar(
-            tabs = uiState.tabs,
-            selectedTabIndex = uiState.selectedTabIndex,
+            tabs = uiState.homeFeedTabs,
+            selectedTabIndex = uiState.homeFeedTabIndex,
             onTabSelected = onTabSelected
         )
 
@@ -43,7 +41,7 @@ fun HomePageContent(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(
-                items = currentList,
+                items = uiState.cardList,
                 key = { it.id }
             ) { item ->
                 HomeCardItemView(

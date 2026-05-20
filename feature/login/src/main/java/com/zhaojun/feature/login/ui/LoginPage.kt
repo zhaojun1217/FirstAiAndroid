@@ -16,7 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,30 +25,22 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.zhaojun.common.ui.effect.CollectUiEvents
 import com.zhaojun.feature.login.vm.LoginViewModel
 import com.zhaojun.router.service.Navigator
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/29
- */
 @Composable
 fun LoginPage(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
-    onLoginSuccess: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(uiState.loginSuccess) {
-        if (uiState.loginSuccess) {
-            onLoginSuccess()
-            Navigator.toHome(context, clearTask = true)
-            viewModel.onLoginNavigated()
-        }
-    }
+    CollectUiEvents(
+        uiEvent = viewModel.uiEvent,
+        onNavigateToHome = { Navigator.toHome(context, clearTask = true) },
+    )
 
     Column(
         modifier = modifier
@@ -101,9 +93,7 @@ fun LoginPage(
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = {
-                viewModel.login()
-            },
+            onClick = viewModel::login,
             modifier = Modifier.fillMaxWidth(),
             enabled = uiState.account.isNotBlank() &&
                     uiState.password.isNotBlank() &&

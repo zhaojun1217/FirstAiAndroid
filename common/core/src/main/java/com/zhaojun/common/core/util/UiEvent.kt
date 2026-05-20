@@ -1,11 +1,8 @@
 package com.zhaojun.common.core.util
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/30
- */
+/** ViewModel 发出、由 UI 层消费的一次性副作用事件 */
 sealed class UiEvent {
     data class ShowToast(val message: String) : UiEvent()
-    data class NavigateTo(val route: String) : UiEvent()
+    data object NavigateToLogin : UiEvent()
+    data object NavigateToHome : UiEvent()
 }

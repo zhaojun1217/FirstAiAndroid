@@ -1,22 +1,9 @@
 package com.zhaojun.feature.home.vm
 
 import com.zhaojun.common.core.base.BaseViewModel
-import com.zhaojun.common.core.util.ToastUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/31
- */
+/** 设置页专属逻辑可在此扩展；登出等会话操作由 [HomeViewModel] 统一处理 */
 @HiltViewModel
-class SettingViewModel @Inject constructor(
-    val toastUtil: ToastUtil
-): BaseViewModel() {
-
-    fun showToast(){
-        toastUtil.show("sss")
-    }
-
-}
+class SettingViewModel @Inject constructor() : BaseViewModel()

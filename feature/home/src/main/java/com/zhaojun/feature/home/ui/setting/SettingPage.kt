@@ -1,6 +1,5 @@
 package com.zhaojun.feature.home.ui.setting
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.foundation.background
@@ -30,7 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.zhaojun.feature.home.vm.SettingViewModel
+import com.zhaojun.feature.home.vm.HomeViewModel
 import com.zhaojun.router.service.Navigator
 import com.zhaojun.common.ui.R
 
@@ -41,7 +40,7 @@ import com.zhaojun.common.ui.R
  */
 
 @Composable
-fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
+fun SettingPage(vm: HomeViewModel = hiltViewModel()) {
     var darkModeEnabled by rememberSaveable { mutableStateOf(false) }
     var notificationEnabled by rememberSaveable { mutableStateOf(true) }
     val context = LocalContext.current
@@ -91,7 +90,6 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
                     icon = Icons.Default.Storage,
                     onClick = {
                         // TODO 清除缓存
-                        Toast.makeText(context, testStr, Toast.LENGTH_SHORT).show()
                     }
                 )
             }
@@ -136,11 +134,7 @@ fun SettingPage(vm: SettingViewModel = hiltViewModel()) {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedButton(
-                onClick = {
-                    // TODO 退出登录
-//                    Toast.makeText(context, "退出登录", Toast.LENGTH_SHORT).show()
-
-                },
+                onClick = vm::logout,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(

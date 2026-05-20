@@ -9,10 +9,7 @@ import com.zhaojun.common.network.session.SessionManager
 import com.zhaojun.feature.home.repository.HomeViewRepository
 import com.zhaojun.feature.home.state.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,9 +24,6 @@ class HomeViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val _sessionExpired = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
-    val sessionExpired: SharedFlow<Unit> = _sessionExpired.asSharedFlow()
-
     init {
         viewModelScope.launch {
             authEventBus.authExpired.collect {
@@ -38,8 +32,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onTabSelected(index: Int) {
-        _uiState.update { it.copy(selectedTabIndex = index) }
+    fun onMainTabSelected(index: Int) {
+        _uiState.update { it.copy(mainTabIndex = index) }
+    }
+
+    fun onHomeFeedTabSelected(index: Int) {
+        _uiState.update { it.copy(homeFeedTabIndex = index) }
     }
 
     fun getDiaryList(page: Int = 1) {
@@ -65,8 +63,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun logout() {
+        viewModelScope.launch {
+            handleSessionExpired()
+        }
+    }
+
     private suspend fun handleSessionExpired() {
         sessionManager.clearSession()
-        _sessionExpired.emit(Unit)
+        sendUiEvent(UiEvent.NavigateToLogin)
     }
 }

@@ -2,14 +2,12 @@ package com.zhaojun.feature.home.state
 
 import com.zhaojun.feature.home.model.Diary
 
-/**
- *     author : zhaojun
- *     e-mail : 1334561398@qq.com
- *     time   : 2026/03/29
- */
 data class HomeUiState(
-    val selectedTabIndex: Int = 0,
+    /** 底部导航栏选中项：0=首页 1=发现 2=设置 */
+    val mainTabIndex: Int = 0,
+    /** 首页内顶部 Tab：小日记 / 我喜欢 */
+    val homeFeedTabIndex: Int = 0,
     val loading: Boolean = false,
-    val tabs: List<String> = listOf("小日记", "我喜欢"),
-    val cardList: List<Diary> = emptyList()
+    val homeFeedTabs: List<String> = listOf("小日记", "我喜欢"),
+    val cardList: List<Diary> = emptyList(),
 )
