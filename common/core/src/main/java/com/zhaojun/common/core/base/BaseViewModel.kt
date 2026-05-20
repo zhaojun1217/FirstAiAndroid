@@ -7,5 +7,4 @@ import androidx.lifecycle.ViewModel
  *     e-mail : 1334561398@qq.com
  *     time   : 2026/03/29
  */
-
 open class BaseViewModel : ViewModel()

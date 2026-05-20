@@ -16,7 +16,6 @@ class App : Application() {
         lateinit var context: Application
             private set
     }
-
     override fun onCreate() {
         super.onCreate()
         context = this

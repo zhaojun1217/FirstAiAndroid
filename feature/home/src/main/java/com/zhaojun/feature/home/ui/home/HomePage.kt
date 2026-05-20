@@ -9,7 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhaojun.feature.home.state.HomeUiState
 import com.zhaojun.feature.home.vm.HomeViewModel
+import kotlinx.coroutines.launch
 
 /**
  *     author : zhaojun
@@ -30,8 +36,11 @@ fun HomePage(
     modifier: Modifier = Modifier,
     vm: HomeViewModel = hiltViewModel()
 ) {
+    var count by remember { mutableStateOf(0) }
     val uiState by vm.uiState.collectAsStateWithLifecycle()
+//    val uiState1 by vm.uiState.collectAsState()
     val context = LocalContext.current
+    val cusScope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = true) {
         vm.getDiaryList()
@@ -42,7 +51,8 @@ fun HomePage(
         uiState = uiState,
         onTabSelected = vm::onTabSelected,
         onItemClick = { item ->
-            // TODO: 点击事件
+            cusScope.launch {
+            }
         }
     )
 }

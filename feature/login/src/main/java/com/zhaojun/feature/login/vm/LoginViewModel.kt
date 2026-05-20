@@ -37,22 +37,35 @@ class LoginViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(password = password)
     }
 
+    fun onLoginNavigated() {
+        _uiState.value = _uiState.value.copy(loginSuccess = false)
+    }
+
     fun login() {
         val state = _uiState.value
         if (state.account.isBlank() || state.password.isBlank()) return
-
         viewModelScope.launch {
             _uiState.value = state.copy(isLoading = true, errorMsg = null)
             when (val result = repository.login(state.account, state.password)) {
 
                 is ApiResult.Success -> {
                     val token = result.data?.token.orEmpty()
-                    // 登录成功
-                    if (token.isNotEmpty()) {
-                        tokenProvider.updateToken(token)
-                        userPreferencesRepository.saveLoginInfo(token, "uid")
+                    if (token.isBlank()) {
+                        val message = "登录失败：未获取到 token"
+                        toastUtil.show(message)
+                        _uiState.value = _uiState.value.copy(
+                            isLoading = false,
+                            errorMsg = message
+                        )
+                        return@launch
                     }
-                    _uiState.value = _uiState.value.copy(isLoading = false, loginSuccess = true)
+                    val uid = result.data?.resolvedUid(state.account).orEmpty()
+                    tokenProvider.updateToken(token)
+                    userPreferencesRepository.saveLoginInfo(token, uid)
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        loginSuccess = true
+                    )
                 }
 
                 is ApiResult.Error -> {

@@ -45,7 +45,8 @@ fun LoginPage(
     LaunchedEffect(uiState.loginSuccess) {
         if (uiState.loginSuccess) {
             onLoginSuccess()
-            Navigator.toHome(context, true)
+            Navigator.toHome(context, clearTask = true)
+            viewModel.onLoginNavigated()
         }
     }
 
@@ -87,6 +88,15 @@ fun LoginPage(
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
+
+        uiState.errorMsg?.let { errorMsg ->
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = errorMsg,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
 
         Spacer(modifier = Modifier.height(24.dp))
 

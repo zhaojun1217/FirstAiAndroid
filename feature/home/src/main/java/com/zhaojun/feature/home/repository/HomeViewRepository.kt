@@ -1,12 +1,20 @@
 package com.zhaojun.feature.home.repository
 
+import android.R.attr.password
 import android.util.Log
+import android.util.Log.e
 import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.home.api.HomeApiService
 import com.zhaojun.feature.home.ext.safeHomeApiCall
 import com.zhaojun.feature.home.model.DiaryDetResponse
 import com.zhaojun.feature.home.model.DiaryListResponse
+import com.zhaojun.feature.home.state.HomeUiState
 import jakarta.inject.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
  *     author : zhaojun
@@ -29,4 +37,7 @@ class HomeViewRepository @Inject constructor(
         }
     }
 
+    fun texstf(): Flow<HomeUiState> = flow {
+
+    }
 }
