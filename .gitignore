@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+.cursor/skills/publish-test/config.env
