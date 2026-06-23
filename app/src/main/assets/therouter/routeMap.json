@@ -19,5 +19,12 @@
     "action": "",
     "description": "",
     "params": {}
+  },
+  {
+    "path": "/home/diary/upload",
+    "className": "com.zhaojun.feature.home.DiaryUploadActivity",
+    "action": "",
+    "description": "",
+    "params": {}
   }
 ]

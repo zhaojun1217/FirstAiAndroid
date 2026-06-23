@@ -5,5 +5,8 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
+        <activity
+            android:name=".DiaryUploadActivity"
+            android:exported="false" />
     </application>
 </manifest>

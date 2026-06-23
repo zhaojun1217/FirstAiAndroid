@@ -43,4 +43,13 @@ object Navigator {
     fun toMine() {
         TheRouter.build(RouterPath.MINE).navigation()
     }
+
+    /** 跳转上传日记页，[draftId] 为空表示新建 */
+    fun toDiaryUpload(context: Context, draftId: Long? = null) {
+        val builder = TheRouter.build(RouterPath.DIARY_UPLOAD)
+        if (draftId != null) {
+            builder.withLong(RouterPath.EXTRA_DRAFT_ID, draftId)
+        }
+        builder.navigation(context)
+    }
 }

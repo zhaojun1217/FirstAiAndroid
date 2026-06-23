@@ -3,6 +3,7 @@ package com.zhaojun.feature.home.repository
 import com.zhaojun.common.network.ext.safeApiCall
 import com.zhaojun.common.network.model.ApiResult
 import com.zhaojun.feature.home.api.HomeApiService
+import com.zhaojun.feature.home.model.DiaryCreateRequest
 import com.zhaojun.feature.home.model.DiaryDetResponse
 import com.zhaojun.feature.home.model.DiaryListResponse
 import javax.inject.Inject
@@ -20,6 +21,12 @@ class HomeViewRepository @Inject constructor(
     suspend fun getDiaryDet(diaryId: Int): ApiResult<DiaryDetResponse> {
         return safeApiCall {
             homeApiService.getDiaryDetail(id = diaryId)
+        }
+    }
+
+    suspend fun createDiary(request: DiaryCreateRequest): ApiResult<DiaryDetResponse> {
+        return safeApiCall {
+            homeApiService.createDiary(request)
         }
     }
 }

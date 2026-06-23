@@ -12,6 +12,7 @@ fun CollectUiEvents(
     uiEvent: SharedFlow<UiEvent>,
     onNavigateToLogin: () -> Unit = {},
     onNavigateToHome: () -> Unit = {},
+    onFinishCurrentPage: () -> Unit = {},
 ) {
     val context = LocalContext.current
     LaunchedEffect(uiEvent) {
@@ -22,6 +23,7 @@ fun CollectUiEvents(
                 }
                 UiEvent.NavigateToLogin -> onNavigateToLogin()
                 UiEvent.NavigateToHome -> onNavigateToHome()
+                UiEvent.FinishCurrentPage -> onFinishCurrentPage()
             }
         }
     }
